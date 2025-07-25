@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tela Única GVC – Interativo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .container {
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      max-width: 420px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .header {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .subheader {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+
+    .status {
+      background-color: #27ae60;
+      color: white;
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .card {
+      background-color: #f2f2f2;
+      padding: 12px;
+      border-radius: 8px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 10px;
+      text-align: center;
+      border-radius: 6px;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+    }
+
+    .btn-red { background-color: #e74c3c; }
+    .btn-orange { background-color: #f39c12; }
+    .btn-green { background-color: #27ae60; }
+    .btn-gray { background-color: #7f8c8d; }
+
+    .alert {
+      background-color: #ffe6e6;
+      color: #c0392b;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 13px;
+      margin-top: 15px;
+    }
+
+    .history-box div {
+      margin-bottom: 6px;
+      padding: 6px;
+      border-radius: 6px;
+      font-size: 14px;
+      color: white;
+    }
+
+    .descumprido { background-color: #e74c3c; }
+    .pendente { background-color: #f39c12; }
+    .nenhum { background-color: #3498db; }
+  </style>
+  <script>
+    function simularAcao(mensagem) {
+      alert(mensagem);
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="header">Jennyfer Azevedo</div>
+    <div class="subheader">626.318.760-90</div>
+    <div class="status">« AMIGÁVEL</div>
+
+    <div class="section">
+      <div class="section-title">Parcelamento no cartão</div>
+      <div class="card">
+        <strong>5x de R$ 420,00</strong><br>
+        Diluição
+        <div class="buttons">
+          <div class="btn btn-gray" onclick="simularAcao('Parcelamento gerado com sucesso!')">Gerar parcelamento</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Boleto em atraso</div>
+      <div class="card">
+        Vencimento: <strong>10/01/2024</strong>
+        <div class="buttons">
+          <div class="btn btn-red" onclick="simularAcao('Acordo COM desconto gerado!')">Gerar com desconto</div>
+          <div class="btn btn-orange" onclick="simularAcao('Acordo SEM desconto gerado!')">Gerar sem desconto</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Histórico</div>
+      <div class="history-box">
+        <div class="descumprido">2 negociações descumpridas</div>
+        <div class="descumprido">0 acordo(s) descumprido(s)</div>
+        <div class="pendente">0 acordo(s) pendente de pagamento</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Status Jurídico</div>
+      <div class="history-box">
+        <div class="nenhum">Não existem processos jurídicos</div>
+      </div>
+    </div>
+
+    <div class="alert">Atenção! Este cliente possui contratos em outras carteiras.</div>
+  </div>
+</body>
+</html>
