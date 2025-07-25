@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tela Única GVC – Interativo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tela Única GVC – Atualizado</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-      padding: 20px;
+      background-color: #f7f7f7;
       margin: 0;
+      padding: 20px;
     }
 
     .container {
-      background-color: white;
-      border-radius: 8px;
+      background-color: #fff;
+      border-radius: 10px;
       padding: 20px;
-      max-width: 420px;
+      max-width: 430px;
       margin: auto;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
     .header {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: bold;
     }
 
@@ -35,36 +35,36 @@
     .status {
       background-color: #27ae60;
       color: white;
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 6px;
+      padding: 5px 12px;
+      border-radius: 20px;
       font-size: 12px;
+      display: inline-block;
       margin-bottom: 20px;
     }
 
     .section {
-      margin-bottom: 20px;
+      margin-bottom: 25px;
     }
 
     .section-title {
       font-weight: bold;
-      margin-bottom: 5px;
+      margin-bottom: 6px;
     }
 
     .card {
       background-color: #f2f2f2;
-      padding: 12px;
+      padding: 14px;
       border-radius: 8px;
     }
 
     .buttons {
       display: flex;
+      flex-direction: column;
       gap: 10px;
-      margin-top: 10px;
+      margin-top: 12px;
     }
 
     .btn {
-      flex: 1;
       padding: 10px;
       text-align: center;
       border-radius: 6px;
@@ -78,15 +78,6 @@
     .btn-green { background-color: #27ae60; }
     .btn-gray { background-color: #7f8c8d; }
 
-    .alert {
-      background-color: #ffe6e6;
-      color: #c0392b;
-      padding: 10px;
-      border-radius: 6px;
-      font-size: 13px;
-      margin-top: 15px;
-    }
-
     .history-box div {
       margin-bottom: 6px;
       padding: 6px;
@@ -98,13 +89,45 @@
     .descumprido { background-color: #e74c3c; }
     .pendente { background-color: #f39c12; }
     .nenhum { background-color: #3498db; }
+
+    .alert {
+      background-color: #ffe6e6;
+      color: #c0392b;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 13px;
+      margin-top: 15px;
+    }
+
+    select {
+      width: 100%;
+      padding: 8px;
+      border-radius: 6px;
+      margin-top: 10px;
+      font-weight: bold;
+    }
   </style>
+
   <script>
-    function simularAcao(mensagem) {
-      alert(mensagem);
+    function gerarParcelamento() {
+      const valor = 2100;
+      const parcelas = document.getElementById("opcaoParcelas").value;
+      const valorParcela = (valor / parcelas).toFixed(2);
+      alert(`Parcelamento em ${parcelas}x de R$ ${valorParcela}`);
+    }
+
+    function gerarComDesconto() {
+      const valorOriginal = 2000;
+      const valorDesconto = valorOriginal * 1.05;
+      alert(`Boleto com desconto gerado: R$ ${valorDesconto.toFixed(2)}`);
+    }
+
+    function gerarSemDesconto() {
+      alert("Boleto com valor cheio (R$ 2.300,00) gerado.");
     }
   </script>
 </head>
+
 <body>
   <div class="container">
     <div class="header">Jennyfer Azevedo</div>
@@ -114,10 +137,14 @@
     <div class="section">
       <div class="section-title">Parcelamento no cartão</div>
       <div class="card">
-        <strong>5x de R$ 420,00</strong><br>
-        Diluição
+        <label for="opcaoParcelas"><strong>Escolha a opção de parcelamento:</strong></label>
+        <select id="opcaoParcelas">
+          <option value="5">5x</option>
+          <option value="10">10x</option>
+          <option value="20">20x</option>
+        </select>
         <div class="buttons">
-          <div class="btn btn-gray" onclick="simularAcao('Parcelamento gerado com sucesso!')">Gerar parcelamento</div>
+          <div class="btn btn-gray" onclick="gerarParcelamento()">Gerar parcelamento</div>
         </div>
       </div>
     </div>
@@ -125,10 +152,11 @@
     <div class="section">
       <div class="section-title">Boleto em atraso</div>
       <div class="card">
-        Vencimento: <strong>10/01/2024</strong>
+        <p>Valor original: <strong>R$ 2.000,00</strong></p>
+        <p>Valor com juros/multa: <strong>R$ 2.300,00</strong></p>
         <div class="buttons">
-          <div class="btn btn-red" onclick="simularAcao('Acordo COM desconto gerado!')">Gerar com desconto</div>
-          <div class="btn btn-orange" onclick="simularAcao('Acordo SEM desconto gerado!')">Gerar sem desconto</div>
+          <div class="btn btn-red" onclick="gerarComDesconto()">Gerar com desconto</div>
+          <div class="btn btn-orange" onclick="gerarSemDesconto()">Gerar sem desconto</div>
         </div>
       </div>
     </div>
