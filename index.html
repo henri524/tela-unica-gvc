@@ -1,91 +1,72 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tela Única GVC – Interativo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tela Única GVC – Beta</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
       margin: 0;
-      padding: 20px;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
     }
 
-    .container {
-      background-color: #fff;
-      border-radius: 10px;
-      padding: 20px;
-      max-width: 450px;
-      margin: auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    .header {
-      font-size: 22px;
-      font-weight: bold;
-    }
-
-    .subheader {
-      font-size: 14px;
-      color: #666;
-      margin-bottom: 10px;
-    }
-
-    .status {
-      background-color: #27ae60;
+    .menu {
+      width: 200px;
+      background-color: #2c3e50;
       color: white;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 12px;
-      display: inline-block;
-      margin-bottom: 20px;
+      height: 100vh;
+      position: fixed;
+      padding-top: 20px;
     }
 
-    .section {
-      margin-bottom: 25px;
-    }
-
-    .section-title {
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
-
-    .card {
-      background-color: #f9f9f9;
-      padding: 15px;
-      border-radius: 8px;
-    }
-
-    .buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .btn {
-      padding: 10px;
+    .menu h2 {
       text-align: center;
-      border-radius: 6px;
-      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .menu button {
+      width: 100%;
+      padding: 15px;
+      background-color: #34495e;
+      border: none;
       color: white;
+      text-align: left;
       cursor: pointer;
     }
 
-    .btn-red { background-color: #e74c3c; }
-    .btn-orange { background-color: #f39c12; }
-    .btn-green { background-color: #27ae60; }
-    .btn-gray { background-color: #7f8c8d; }
-
-    select {
-      width: 100%;
-      padding: 8px;
-      border-radius: 6px;
-      margin-top: 10px;
-      font-weight: bold;
+    .menu button:hover {
+      background-color: #1abc9c;
     }
 
+    .conteudo {
+      margin-left: 200px;
+      padding: 20px;
+    }
+
+    .cliente-select {
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      margin-top: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .btn-red { background-color: #c0392b; }
+    .btn-blue { background-color: #2980b9; }
     .checkbox-list label {
       display: block;
       margin-bottom: 8px;
@@ -93,109 +74,174 @@
 
     .total-box {
       margin-top: 10px;
-      background: #dff0d8;
+      background: #ecf0f1;
       padding: 10px;
       border-radius: 6px;
       font-weight: bold;
     }
 
-    .alert {
-      background-color: #ffe6e6;
-      color: #c0392b;
-      padding: 10px;
-      border-radius: 6px;
-      font-size: 13px;
-      margin-top: 15px;
+    @media (max-width: 600px) {
+      .menu {
+        position: static;
+        width: 100%;
+        height: auto;
+      }
+      .conteudo {
+        margin-left: 0;
+      }
     }
   </style>
-
-  <script>
-    const parcelas = [
-      { id: 1, descricao: 'Parcela 1 - Venc. 10/06', valor: 600.00 },
-      { id: 2, descricao: 'Parcela 2 - Venc. 10/07', valor: 650.00 },
-      { id: 3, descricao: 'Parcela 3 - Venc. 10/08', valor: 700.00 }
-    ];
-
-    function atualizarTotal() {
-      const checkboxes = document.querySelectorAll('.parcela-checkbox');
-      let total = 0;
-
-      checkboxes.forEach((cb, index) => {
-        if (cb.checked) {
-          total += parcelas[index].valor;
-        }
-      });
-
-      document.getElementById("valorTotal").innerText = "R$ " + total.toFixed(2);
-
-      const comDesconto = total * 0.95;
-      document.getElementById("valorDesconto").innerText = "R$ " + comDesconto.toFixed(2);
-      document.getElementById("valorCartao").innerText = "R$ " + total.toFixed(2);
-    }
-
-    function gerarBoletoComDesconto() {
-      const texto = document.getElementById("valorDesconto").innerText;
-      alert("Boleto com 5% de desconto gerado: " + texto);
-    }
-
-    function gerarBoletoSemDesconto() {
-      const texto = document.getElementById("valorTotal").innerText;
-      alert("Boleto gerado sem desconto: " + texto);
-    }
-
-    function gerarParcelamento() {
-      const texto = document.getElementById("valorCartao").innerText;
-      const parcelas = document.getElementById("opcaoParcelas").value;
-      const valor = parseFloat(texto.replace("R$", "").replace(",", "."));
-      const valorParcela = (valor / parcelas).toFixed(2);
-      alert(`Parcelado em ${parcelas}x de R$ ${valorParcela}`);
-    }
-  </script>
 </head>
-<body onload="atualizarTotal()">
-  <div class="container">
-    <div class="header">Jennyfer Azevedo</div>
-    <div class="subheader">626.318.760-90</div>
-    <div class="status">« AMIGÁVEL</div>
+<body>
 
-    <div class="section">
-      <div class="section-title">Selecionar parcelas para pagamento:</div>
-      <div class="card checkbox-list">
-        <label><input type="checkbox" class="parcela-checkbox" checked onchange="atualizarTotal()"> Parcela 1 – R$ 600,00</label>
-        <label><input type="checkbox" class="parcela-checkbox" checked onchange="atualizarTotal()"> Parcela 2 – R$ 650,00</label>
-        <label><input type="checkbox" class="parcela-checkbox" onchange="atualizarTotal()"> Parcela 3 – R$ 700,00</label>
+<div class="menu">
+  <h2>Menu</h2>
+  <button onclick="mostrarTela('cliente')">Selecionar Cliente</button>
+  <button onclick="mostrarTela('parcelas')">Parcelas Atrasadas</button>
+  <button onclick="mostrarTela('cartao')">Parcelamento Cartão</button>
+</div>
 
-        <div class="total-box">
-          Valor Total: <span id="valorTotal">R$ 0,00</span><br/>
-          Valor com Desconto (5%): <span id="valorDesconto">R$ 0,00</span>
-        </div>
-
-        <div class="buttons">
-          <div class="btn btn-red" onclick="gerarBoletoComDesconto()">Gerar com desconto</div>
-          <div class="btn btn-orange" onclick="gerarBoletoSemDesconto()">Gerar sem desconto</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-title">Parcelamento no cartão</div>
-      <div class="card">
-        <p>Valor a ser parcelado: <strong><span id="valorCartao">R$ 0,00</span></strong></p>
-        <label for="opcaoParcelas"><strong>Escolha a opção:</strong></label>
-        <select id="opcaoParcelas">
-          <option value="5">5x</option>
-          <option value="10">10x</option>
-          <option value="20">20x</option>
-        </select>
-        <div class="buttons">
-          <div class="btn btn-gray" onclick="gerarParcelamento()">Gerar parcelamento</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="alert">
-      Atenção! Este cliente possui contratos em outras carteiras.
+<div class="conteudo">
+  <div id="cliente" class="card">
+    <h3>Selecionar Cliente</h3>
+    <select id="clienteSelect" class="cliente-select" onchange="trocarCliente()">
+      <option value="0">Jennyfer Azevedo – 626.318.760-90</option>
+      <option value="1">Carlos Mendes – 408.289.110-22</option>
+      <option value="2">Ana Vitória – 129.004.800-45</option>
+    </select>
+    <div id="dadosCliente">
+      <p><strong>Nome:</strong> Jennyfer Azevedo</p>
+      <p><strong>CPF:</strong> 626.318.760-90</p>
+      <p><strong>Status:</strong> Amigável</p>
     </div>
   </div>
+
+  <div id="parcelas" class="card" style="display:none;">
+    <h3>Parcelas em Aberto</h3>
+    <div class="checkbox-list" id="listaParcelas"></div>
+    <div class="total-box">
+      Total: <span id="totalParcelas">R$ 0,00</span><br>
+      Com desconto (5%): <span id="descontoParcelas">R$ 0,00</span>
+    </div>
+    <button class="btn" onclick="gerarBoleto()">Gerar Boleto</button>
+    <button class="btn btn-red" onclick="enviarFinanceiro()">Enviar para Financeiro</button>
+  </div>
+
+  <div id="cartao" class="card" style="display:none;">
+    <h3>Parcelamento no Cartão</h3>
+    <p>Valor total: <span id="valorCartao">R$ 0,00</span></p>
+    <label>Escolha a quantidade de parcelas:</label>
+    <select id="parcelasCartao">
+      <option value="5">5x</option>
+      <option value="10">10x</option>
+      <option value="20">20x</option>
+    </select><br>
+    <button class="btn btn-blue" onclick="parcelarCartao()">Gerar Parcelamento</button>
+  </div>
+</div>
+
+<script>
+const clientes = [
+  {
+    nome: "Jennyfer Azevedo",
+    cpf: "626.318.760-90",
+    status: "Amigável",
+    parcelas: [
+      { descricao: "Parcela 1 – Venc. 10/06", valor: 600 },
+      { descricao: "Parcela 2 – Venc. 10/07", valor: 650 },
+      { descricao: "Parcela 3 – Venc. 10/08", valor: 700 }
+    ]
+  },
+  {
+    nome: "Carlos Mendes",
+    cpf: "408.289.110-22",
+    status: "Acordo Quebrado",
+    parcelas: [
+      { descricao: "Parcela 1 – Venc. 05/05", valor: 800 },
+      { descricao: "Parcela 2 – Venc. 05/06", valor: 820 }
+    ]
+  },
+  {
+    nome: "Ana Vitória",
+    cpf: "129.004.800-45",
+    status: "Pré-Jurídico",
+    parcelas: [
+      { descricao: "Parcela 1 – Venc. 01/04", valor: 1200 },
+      { descricao: "Parcela 2 – Venc. 01/05", valor: 1300 },
+      { descricao: "Parcela 3 – Venc. 01/06", valor: 1250 }
+    ]
+  }
+];
+
+let clienteAtual = 0;
+
+function mostrarTela(tela) {
+  document.getElementById('cliente').style.display = 'none';
+  document.getElementById('parcelas').style.display = 'none';
+  document.getElementById('cartao').style.display = 'none';
+  document.getElementById(tela).style.display = 'block';
+  if (tela === 'parcelas') atualizarParcelas();
+}
+
+function trocarCliente() {
+  clienteAtual = document.getElementById('clienteSelect').value;
+  const cliente = clientes[clienteAtual];
+  document.getElementById('dadosCliente').innerHTML = `
+    <p><strong>Nome:</strong> ${cliente.nome}</p>
+    <p><strong>CPF:</strong> ${cliente.cpf}</p>
+    <p><strong>Status:</strong> ${cliente.status}</p>
+  `;
+  atualizarParcelas();
+}function atualizarParcelas() {
+  const lista = document.getElementById("listaParcelas");
+  lista.innerHTML = "";
+  const parcelas = clientes[clienteAtual].parcelas;
+  parcelas.forEach((parcela, index) => {
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = true;
+    checkbox.className = "parcelaCheckbox";
+    checkbox.dataset.valor = parcela.valor;
+    checkbox.onchange = atualizarTotais;
+
+    const label = document.createElement("label");
+    label.appendChild(checkbox);
+    label.appendChild(document.createTextNode(` ${parcela.descricao} – R$ ${parcela.valor.toFixed(2)}`));
+    lista.appendChild(label);
+  });
+  atualizarTotais();
+}
+
+function atualizarTotais() {
+  const checkboxes = document.querySelectorAll(".parcelaCheckbox");
+  let total = 0;
+  checkboxes.forEach(cb => {
+    if (cb.checked) {
+      total += parseFloat(cb.dataset.valor);
+    }
+  });
+  document.getElementById("totalParcelas").innerText = `R$ ${total.toFixed(2)}`;
+  document.getElementById("descontoParcelas").innerText = `R$ ${(total * 0.95).toFixed(2)}`;
+  document.getElementById("valorCartao").innerText = `R$ ${total.toFixed(2)}`;
+}
+
+function gerarBoleto() {
+  const valor = document.getElementById("descontoParcelas").innerText;
+  alert("Boleto gerado com 5% de desconto no valor de " + valor);
+}
+
+function enviarFinanceiro() {
+  const valor = document.getElementById("totalParcelas").innerText;
+  alert("Solicitação enviada ao financeiro no valor de " + valor);
+}
+
+function parcelarCartao() {
+  const valorTexto = document.getElementById("valorCartao").innerText.replace("R$", "").trim();
+  const parcelas = document.getElementById("parcelasCartao").value;
+  const total = parseFloat(valorTexto);
+  const valorParcela = total / parcelas;
+  alert(`Parcelado em ${parcelas}x de R$ ${valorParcela.toFixed(2)}`);
+}
+</script>
 </body>
 </html>
